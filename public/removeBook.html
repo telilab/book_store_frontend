@@ -7,7 +7,11 @@
     <title>Add Book Page</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
+<script>
+    $('#myModal').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus')
+    })
+</script>
 
 </head>
 <body>
@@ -34,48 +38,110 @@
     </nav>
 </header>
 <div class="container">
-    <h1 style="text-align: center">Add your favorite books</h1>
     <div class="container">
-        <form method="DELETE"
-              action="https://bosena-book-store-backend-api.herokuapp.com/api/books/">
+        <form method="DELETE" >
+<!--              action="https://bosena-book-store-backend-api.herokuapp.com/api/books/">-->
             <h2 style="text-align: center">Please provide the ISBN of the book you want to remove</h2>
             <div class="form-group">
                 <label for="ISBN">ISBN:</label>
-                <input type="text" name="isbn" id="ISBN" class="form-control"
+                <input type="text" name="isbn" id="isbn" class="form-control"
                        placeholder="ISBN">
             </div>
             <div class="form-group">
                 <div class="container">
-                    <button class="btn btn-lg btn-outline-primary" id="rmvBook" >Remove Book</button>
+
                 </div>
             </div>
         </form>
 
     </div>
-    <!--    <a  class="btn-lg" id="btnAddBook" role="button" >another button</a>-->
-
+    <button class="btn btn-lg btn-outline-primary" id="going" onclick="findData()">Find Book</button>
     <div class="jumbotron" id="output">
 
     </div>
 </div>
 
+
+
 <script>
-    document.getElementById("btnAddBook").addEventListener("click", (event) =>{
-        let url = "https://bosena-book-store-backend-api.herokuapp.com/api/books/0-7842-8843-7"
+
+    function deleteISBN(){
+        let isbn = document.getElementById("isbn").value;
+
+        let url = "https://bosena-book-store-backend-api.herokuapp.com/api/books/" + isbn;
+
         let xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function (){
             if (this.readyState == 4 && this.status == 200){
-                document.getElementById("output").innerHTML =
-                    "<pre>" + this.responseText + "</pre>";
+                document.getElementById("output").innerHTML = CreateTable1(JSON.parse(this.responseText));
+            }
+            else {
+                document.getElementById("output").innerHTML = "404 **ERROR** this book was not found in our database";
             }
         };
-        // foo=bar&lorem=ipsum
-        let bookData = "0-7842-8843-7";
-        xhttp.open('DELETE', url, true);
-        // Just needed to place this line AFTER opening the object
+
+        // if(confirm("Are you sure you want to delete?")){
+            xhttp.open('Delete', url, true);
+            xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhttp.send(null);
+        // }
+        // else{
+        //     xhttp.open('GET', url, true);
+        //     xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        //     xhttp.send(null);
+        // }
+
+
+    }
+    function findData() {
+        let isbn = document.getElementById("isbn").value;
+
+        let url = "https://bosena-book-store-backend-api.herokuapp.com/api/books/" + isbn;
+
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function (){
+            if (this.readyState == 4 && this.status == 200){
+                document.getElementById("output").innerHTML = CreateTable1(JSON.parse(this.responseText));
+            }
+            else {
+                document.getElementById("output").innerHTML = "404 **ERROR** this book was not found in our database";
+            }
+        };
+        xhttp.open('GET', url, true);
         xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhttp.send(bookData);
-    });
+        xhttp.send(null);
+    }
+    function CreateTable1(data) {
+        let table = "";
+        table =
+            '<table class="table table-bordered table-hover table-light"> \n' +
+            '   <thead>\n' +
+            '       <tr>\n' +
+            '           <th scope="col">Book </th> \n' +
+            '           <th scope="col">Author </th> \n' +
+            '           <th scope="col">ISBN</th> \n' +
+            '           <th scope="col">Price</th> \n' +
+            '       </tr>\n' +
+            '   </thead>\n' +
+            '   <tbody>\n';
+
+        for (let book in data) {
+            table +=
+                '       <tr>\n' +
+                '           <td>' + data["Name"] + '</td>\n' +
+                '           <td>' + data["Author"] + '</td>\n' +
+                '           <td>' + data["ISBN"] + '</td>\n' +
+                '           <td>' + "$" + data["Price"] + '</td>\n' +
+                '       </tr>\n';
+
+            table +=
+                '   </tbody>\n' +
+                '</table>\n' +
+                '<button class="btn btn-lg btn-outline-primary" onclick="deleteISBN()" >Delete</button>   '
+            return table;
+        }
+    }
 </script>
+
 </body>
 </html>
