@@ -17,7 +17,7 @@
 <body>
 <header>
     <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Books</a>
+        <a class="navbar-brand" href="#">Bosena's Book store</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -76,14 +76,17 @@
                 document.getElementById("output").innerHTML = CreateTable1(JSON.parse(this.responseText));
             }
             else {
-                document.getElementById("output").innerHTML = "404 **ERROR** this book was not found in our database";
+                document.getElementById("output").innerHTML = "Hello there, this book DOES NOT exist in our database. We went looking for this book, but came back with 404 or 500 ERROR.";
             }
         };
 
-        if(confirm("Are you sure you want to delete?")){
-            xhttp.open('Delete', url, true);
-            xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            xhttp.send(null);
+        if(confirm("Click \'cancel\' to cancel or \'ok'\ to delete")){
+            if (confirm("Keeo in mind once you click okay this book will be destroyed from our system.")){
+                xhttp.open('Delete', url, true);
+                xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhttp.send(null);
+            }
+
         }
         else{
             xhttp.open('GET', url, true);
@@ -104,7 +107,7 @@
                 document.getElementById("output").innerHTML = CreateTable1(JSON.parse(this.responseText));
             }
             else {
-                document.getElementById("output").innerHTML = "404 **ERROR** this book was not found in our database";
+                document.getElementById("output").innerHTML = "Hello there, this book DOES NOT exist in our database";
             }
         };
         xhttp.open('GET', url, true);

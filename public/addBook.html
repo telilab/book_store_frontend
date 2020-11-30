@@ -8,12 +8,34 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
+<style>
+    label {
+        font-weight: bold;
+        font-size: 16pt;
+        color: black;
+        background-color: rgba(255,255,255,.5) ;
+    }
+    body, html {
+        height: 100%;
+    }
+    .bg {
+        /* The image used */
+        background-image: url("./images/add-page-bg.jpg");
 
+        /* Full height */
+        height: 100%;
+
+        /* Center and scale the image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
 </head>
 <body>
 <header>
     <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Books</a>
+        <a class="navbar-brand" href="#">Bosena's Book store</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -33,64 +55,137 @@
         </form>
     </nav>
 </header>
-<div class="container">
-    <h1 style="text-align: center">Add your favorite books</h1>
+<div class="bg">
     <div class="container">
-        <form method="POST"
-              action="https://bosena-book-store-backend-api.herokuapp.com/api/books">
-            <h5 style="text-align: center">Please provide the title,author,ISBN and price of the book you want to add.</h5>
-            <div class="form-group">
-                <label for="Name">Title of book:</label>
-                <input type="text" name="Name" id="Name" class="form-control"
-                       placeholder="Name">
-            </div>
-            <div class="form-group">
-                <label for="Author">Author:</label>
-                <input type="text" name="Author" id="Author" class="form-control"
-                       placeholder="Author">
-            </div>
-            <div class="form-group">
-                <label for="ISBN">ISBN:</label>
-                <input type="text" name="ISBN" id="ISBN" class="form-control"
-                       placeholder="ISBN">
-            </div>
-            <div class="form-group">
-                <label for="Price">Price:</label>
-                <input type="Price" name="Price" id="Price" class="form-control"
-                       placeholder="Price">
-            </div>
-            <div class="form-group">
-                <div class="container">
-
+        <h1 id="title" style="text-align: center">Add your favorite books</h1>
+        <div class="container">
+            <form method="POST"
+                  action="https://bosena-book-store-backend-api.herokuapp.com/api/books">
+                <h5 style="text-align: center">Please provide the title,author,ISBN and price of the book you want to add.</h5>
+                <div class="form-group">
+                    <label for="Name">Title of book:</label>
+                    <input type="text" name="Name" id="Name" required class="form-control"
+                           placeholder="Name">
                 </div>
-            </div>
-        </form>
+                <div class="form-group">
+                    <label for="Author">Author:</label>
+                    <input type="text" name="Author" id="Author" class="form-control"
+                           placeholder="Author" required>
+                </div>
+                <div class="form-group">
+                    <label for="ISBN">ISBN:</label>
+                    <input type="text" name="ISBN"  required id="ISBN" class="form-control"
+                           placeholder="ISBN">
+                </div>
+                <div class="form-group">
+                    <label for="Price">Price:</label>
+                    <input type="Price" name="Price" id="Price" required class="form-control"
+                           placeholder="Price">
+                </div>
+                <div class="form-group">
+                    <div class="container">
 
-    </div>
-    <button class="btn btn-lg btn-outline-primary" id="btnAddBook" >Add Book</button>
-    <div class="jumbotron" id="output">
+                    </div>
+                </div>
+            </form>
 
+        </div>
+        <button class="btn btn-lg btn-outline-primary" id="btnAddBook"  >Add Book</button>
+        <div class="jumbotron" id="output">
+
+        </div>
     </div>
-</div>
-<script>
-    document.getElementById("btnAddBook").addEventListener("click", (event) =>{
-        let url = "https://bosena-book-store-backend-api.herokuapp.com/api/books"
-        let xhttp = new XMLHttpRequest();
-        let bookData = "Name=" + document.getElementById("Name").value + "&" +
-            "Author=" + document.getElementById("Author").value  + "&" +
-            "ISBN="  + document.getElementById("ISBN").value  + "&" +
-            "Price="  + document.getElementById("Price").value;
-        xhttp.onreadystatechange = function (){
-            if (this.readyState == 4 && this.status == 200){
-                document.getElementById("output").innerHTML = "The book \"" + document.getElementById("Name").value + "\" has successfully been added";
+    <script>
+        document.getElementById("btnAddBook").addEventListener("click", (event) =>{
+            let url = "https://bosena-book-store-backend-api.herokuapp.com/api/books"
+            let xhttp = new XMLHttpRequest();
+            let bookData = "Name=" + document.getElementById("Name").value + "&" +
+                "Author=" + document.getElementById("Author").value  + "&" +
+                "ISBN="  + document.getElementById("ISBN").value  + "&" +
+                "Price="  + document.getElementById("Price").value;
+            xhttp.onreadystatechange = function (){
+                if (this.readyState == 4 && this.status == 200){
+                    document.getElementById("output").innerHTML = "The book \"" + document.getElementById("Name").value + "\" has successfully been added";
+                }
+                else{
+                    document.getElementById("output").innerHTML = "I am sorry to report that we couldn't add your book. We tried adding your book but we got an ERROR along the way. Please try again.";
+                }
+            };
+
+            xhttp.open('POST', url, true);
+            xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhttp.send(bookData);
+
+        });
+    </script>
+    <script>
+
+        var value = document.getElementById("ISBN").value;
+        var ISBN = "ISBN";
+        function valid(){
+            console.log("i came to validate");
+            if(isValidISBN(value)){
+                document.getElementById("title").innerHTML = "bosena";
+                return true;
             }
-        };
+            else {
+                return false;
+            }
+        }
 
-        xhttp.open('POST', url, true);
-        xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhttp.send(bookData);
 
-    });
-</script>
+        function isValidISBN(isbn){
+            var result = false;
+
+            if(isbn != null){
+                isbn =isbn.replace(/-/g, "");
+                isbn = isbn.replace(/ /g, "")
+
+                if(isbn.length == 10)
+                {
+                    result = isValid10(isbn);
+                }
+                if(isbn.length == 13){
+                    result = isvalid13(isbn);
+                }
+            }
+            return result;
+        }
+        function isValid10(isbn){
+            var result = false;
+            var regex = new RegExp(/^\d{9}(\d|X){1}$/);
+            if(regex.test(isbn)){
+                var sum = 0;
+
+
+                for(var i = 0; i < 9; i++){
+                    sum += isbn[i]*(i+1);
+                }
+                sum+= isbn[9] == 'X' ? 10 :isbn[9]*10;
+                result = sum % 11 == 0
+            }
+            return result;
+        }
+        function isvalid13(isbn){
+            var result = false;
+            if(!isNaN(isbn)){
+                var index = 0;
+                var sum = 0;
+
+                for(var i = 0; i <isbn.length; i++)
+                {
+                    sum+= isbn[i]*(isOdd(index++)?3:1);
+                }
+                result = sum % 10 == 0;
+            }
+            return result;
+        }
+
+        function isOdd(num){
+            return num % 2 != 0;
+        }
+    </script>
+</div>
+
 </body>
 </html>

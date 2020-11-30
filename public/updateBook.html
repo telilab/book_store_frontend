@@ -11,7 +11,7 @@
 <body>
 
 <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="">Books</a>
+    <a class="navbar-brand" href="">Bosena's Book store</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -88,8 +88,7 @@
                 document.getElementById("output").innerHTML = CreateTable1(JSON.parse(this.responseText));
             }
             if ( this.status == 404 || this.status == 500 ){
-                document.getElementById("output").innerHTML = "<pre>" + this.responseText + "</pre>";
-                return;
+                document.getElementById("output").innerHTML = "Hello there, our search result came back with 404 not found. Try a different ISBN number";
             }
         };
         xhttp.open('GET', url + isbn, true);
@@ -148,7 +147,7 @@
 
             }
             if ( this.status == 404 || this.status == 500 ){
-                document.getElementById("output2").innerHTML = "<pre>" + this.responseText + "</pre>";
+                document.getElementById("output2").innerHTML = "Hello there, we were not able to update this book. Please try again."
             }
         };
 

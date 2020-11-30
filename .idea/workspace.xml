@@ -30,7 +30,10 @@
     <list default="true" id="9854b3b7-c524-4fb3-968c-9809a555933c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/addBook.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/addBook.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/findBook.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/findBook.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/removeBook.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/removeBook.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/showBook.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/showBook.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/updateBook.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/updateBook.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -74,6 +77,12 @@
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/images" />
+      <recent name="$PROJECT_DIR$/public" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
@@ -89,7 +98,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1606635557042</updated>
-      <workItem from="1606635558426" duration="30314000" />
+      <workItem from="1606635558426" duration="35952000" />
     </task>
     <servers />
   </component>
@@ -111,21 +120,21 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1409" height="296" key="GridCell.Tab.0.bottom" timestamp="1606714240990">
+    <state width="1409" height="296" key="GridCell.Tab.0.bottom" timestamp="1606720569641">
       <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1409" height="296" key="GridCell.Tab.0.bottom/0.0.1440.900/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1606714240990" />
-    <state width="1409" height="296" key="GridCell.Tab.0.center" timestamp="1606714240988">
+    <state width="1409" height="296" key="GridCell.Tab.0.bottom/0.0.1440.900/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1606720569641" />
+    <state width="1409" height="296" key="GridCell.Tab.0.center" timestamp="1606720569637">
       <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1409" height="296" key="GridCell.Tab.0.center/0.0.1440.900/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1606714240988" />
-    <state width="1409" height="296" key="GridCell.Tab.0.left" timestamp="1606714240987">
+    <state width="1409" height="296" key="GridCell.Tab.0.center/0.0.1440.900/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1606720569637" />
+    <state width="1409" height="296" key="GridCell.Tab.0.left" timestamp="1606720569634">
       <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1409" height="296" key="GridCell.Tab.0.left/0.0.1440.900/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1606714240987" />
-    <state width="1409" height="296" key="GridCell.Tab.0.right" timestamp="1606714240989">
+    <state width="1409" height="296" key="GridCell.Tab.0.left/0.0.1440.900/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1606720569634" />
+    <state width="1409" height="296" key="GridCell.Tab.0.right" timestamp="1606720569639">
       <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1409" height="296" key="GridCell.Tab.0.right/0.0.1440.900/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1606714240989" />
+    <state width="1409" height="296" key="GridCell.Tab.0.right/0.0.1440.900/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1606720569639" />
   </component>
 </project>
