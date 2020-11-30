@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Add Book Page</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+</head>
+<body>
+<header>
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Books</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="index.html">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="addBook.html">Add Books</a>
+                <a class="nav-item nav-link" href="showBook.html">Show Books</a>
+                <a class="nav-item nav-link" href="findBook.html">Find Books</a>
+                <a class="nav-item nav-link" href="removeBook.html">Remove Books</a>
+                <a class="nav-item nav-link" href="updateBook.html">Update Books</a>
+            </div>
+        </div>
+        <form class="form-inline">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </nav>
+</header>
+<div class="container">
+    <h1 style="text-align: center">Add your favorite books</h1>
+    <div class="container">
+        <form method="POST"
+              action="https://bosena-book-store-backend-api.herokuapp.com/api/books">
+            <h2 style="text-align: center">Please provide your friend information</h2>
+            <div class="form-group">
+                <label for="Name">Title of book:</label>
+                <input type="text" name="Name" id="Name" class="form-control"
+                       placeholder="Name">
+            </div>
+            <div class="form-group">
+                <label for="Author">Author:</label>
+                <input type="text" name="Author" id="Author" class="form-control"
+                       placeholder="Author">
+            </div>
+            <div class="form-group">
+                <label for="ISBN">ISBN:</label>
+                <input type="text" name="ISBN" id="ISBN" class="form-control"
+                       placeholder="ISBN">
+            </div>
+            <div class="form-group">
+                <label for="Price">Price:</label>
+                <input type="Price" name="Price" id="Price" class="form-control"
+                       placeholder="Price">
+            </div>
+            <div class="form-group">
+                <div class="container">
+                    <button class="btn btn-lg btn-outline-primary" id="btnAddBook" >Add Book</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+    <div class="jumbotron" id="output">
+
+    </div>
+</div>
+<script>
+    document.getElementById("btnAddBook").addEventListener("click", (event) =>{
+        let url = "https://bosena-book-store-backend-api.herokuapp.com/api/books"
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function (){
+            if (this.readyState == 4 && this.status == 200){
+                document.getElementById("output").innerHTML =
+                    "<pre>" + this.responseText + "</pre>";
+            }
+        };
+        // foo=bar&lorem=ipsum
+        let bookData = "Name=" + document.getElementById("Name").value + "&" +
+            "Author=" + document.getElementById("Author").value  + "&" +
+            "ISBN="  + document.getElementById("ISBN").value  + "&" +
+            "Price="  + document.getElementById("Price").value;
+        xhttp.open('POST', url, true);
+        // Just needed to place this line AFTER opening the object
+        xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhttp.send(bookData);
+
+    });
+</script>
+</body>
+</html>

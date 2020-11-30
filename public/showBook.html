@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Show Books Page</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+</head>
+<body>
+
+<header>
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Books</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"  aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="index.html">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="addBook.html" >Add Books</a>
+                <a class="nav-item nav-link" href="showBook.html"  >Show Books</a>
+                <a class="nav-item nav-link" href="findBook.html">Find Books</a>
+                <a class="nav-item nav-link" href="removeBook.html">Remove Books</a>
+                <a class="nav-item nav-link" href="updateBook.html">Update Books</a>
+            </div>
+        </div>
+        <form class="form-inline">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </nav>
+</header>
+<button class="btn-primary btn-lg" id="btnLoadFriends">Load Books</button>
+<div class="jumbotron" id="output">
+
+</div>
+<script>
+    function CreateTable(data){
+        let dollarSign = "$";
+        let table = "";
+        table =
+            '<table class="table table-bordered table-hover"> \n' +
+            '   <thead>\n' +
+            '       <tr>\n' +
+            '           <th scope="col">BooK Title</th> \n'+
+            '           <th scope="col">Author</th> \n'+
+            '           <th scope="col">ISBN</th> \n'+
+            '           <th scope="col">Price</th> \n'+
+            '       </tr>\n' +
+            '   </thead>\n' +
+            '   <tbody>\n';
+
+
+        for (let book in data){
+        table +=
+            '       <tr>\n' +
+                    '           <td>' + data[book]["Name"]+  '</td>\n' +
+                    '           <td>' + data[book]["Author"]+  '</td>\n' +
+                    '           <td>' + data[book]["ISBN"]+  '</td>\n' +
+                    '           <td>' + dollarSign + data[book]["Price"]+  '</td>\n' +
+                    '       </tr>\n';
+    }
+
+        table +=
+            '   </tbody>\n' +
+            '</table>\n'
+        return table;
+    }
+    document.getElementById("btnLoadFriends").addEventListener("click", (event) =>{
+        let url = " https://bosena-book-store-backend-api.herokuapp.com/api/books"
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function (){
+            if (this.readyState == 4 && this.status == 200){
+                document.getElementById("output").innerHTML =
+                    CreateTable(JSON.parse(this.responseText));
+            }
+        };
+        xhttp.open('GET', url, true);
+        xhttp.send();
+    });
+
+</script>
+</body>
+</html>
+
